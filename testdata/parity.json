@@ -1,0 +1,1793 @@
+[
+  {
+    "case": {},
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "uri": "/ordinary?filter=x"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "user"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "uri": "/?AUTHWAVE_RESPONSE_DATA=untrusted"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=NrUb%2FIiIAQk34MHXUV76P0SXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRXCnXlkS2HNcgpBDy24FBk%2FikEFJ%2Fe9%2FiDI0K0sVNs%2BvTU4DcUzbsmi20UrZrTqw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6d656d626572733f783d31236c6174657374",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "x=1",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://localhost:8081?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://127.0.0.127:8080?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=NrUb%2FIiIAQk34MHXUV76P0SXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRXCnXlkS2HNcgpBDy24FBk%2FikEFJ%2Fe9%2FiDI0K0sVNs%2BvTU4DcUzbsmi20UrZrTqw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6d656d626572733f783d31236c6174657374",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "x=1",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://localhost:8081?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://127.0.0.127:8080?c=HbuLfSOIBj22AQry7DKonkSXfa5Wemh6Z43lJRV0SFyPEwc%2F9SpeHvRbTiSEk0%2BHNcguEyGL70tOzAweKLzR6ZyNMmyFv0JCy%2FrFzgYa3JUXhXw6nJTChTWufs9kjtYsnw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "pending",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": "tab=security",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "login",
+      "state": "user",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2FSNxDPuAADi%2BbtNkpfQA30SXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDMxWaWNdkoRHu57kgO7V5Jf%2Fv0%2FtWxFl7LlXBn0cbmwRh%2B0oQ5tHIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97M%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6d656d626572733f783d31236c6174657374",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://localhost:8081?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://127.0.0.127:8080?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2FSNxDPuAADi%2BbtNkpfQA30SXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDMxWaWNdkoRHu57kgO7V5Jf%2Fv0%2FtWxFl7LlXBn0cbmwRh%2B0oQ5tHIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97M%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6d656d626572733f783d31236c6174657374",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://localhost:8081?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://127.0.0.127:8080?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "pending",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": "/members?x=1#latest"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2FSNxDPuAADi%2BbtNkpfQA30SXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDMxWaWNdkoRHu57kgO7V5Jf%2Fv0%2FtWxFl7LlXBn0cbmwRh%2B0oQ5tHIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97M%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6d656d626572733f783d31236c6174657374",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "host": "http://localhost:8081"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://localhost:8081?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "host": "http://unsafe.example"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "host": "http://127.0.0.127:8080"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "http://127.0.0.127:8080?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "host": "http://127.0.0.1"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "InsecureProtocolException",
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": null,
+      "redirectTo": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BB8MHhQadoUSJ%2FvK3AmEF0SXfa5Wemh6Z43jPkcgXk2ZEwwayTkRPp5pRx%2F25mOtB%2B0zOB%2B5%2FjRq7wc1Go7wxvaSDXO6oH0%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": null,
+      "redirectTo": "/explicit"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=QKGPJVJlQ1zTz6Qk9X3u6ESXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDE2HuYOcgyFW6M8w5PzBslO%2FXByOe8PH2rjkxT5cvL3ygr0oQ5tHIrsqXMlBufcN5Kvw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": null,
+      "redirectTo": "?signed-out=1"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=R0p0rCC7DvUxBfpICTvcA0SXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDAw2ibJcUvRHu55QRaxwoIYKft64TnIRvLlXBn0cbmwRh%2B0oQ5tHIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97M%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": null,
+      "redirectTo": "https://example.com/bye"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BcPmC66KGCiHA5%2BbubKYbESXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPRHWzLR0y7HEY5pJ23N0AhFyAIcIa22%2FM65QBirhGxhhdD36xwm%2F5oJ4XIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97O5A4qP&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f6163636f756e743f7461623d7365637572697479",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": "/configured?source=authwave",
+      "redirectTo": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=GCUUixamuoS6qGYFGeDFokSXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDCz2WSOcwuEy2bs1572gAZP6v9upKQBF%2BZjmJl1ca0%2Bwsg%2BbYLlV1BrZrTqwSgb%2BFVgMcCrn2b%2BkaSq6i1vMvo6IymPJWwnpQ%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f636f6e666967757265643f736f757263653d6175746877617665",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": "/configured?source=authwave",
+      "redirectTo": "/explicit"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=QKGPJVJlQ1zTz6Qk9X3u6ESXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDE2HuYOcgyFW6M8w5PzBslO%2FXByOe8PH2rjkxT5cvL3ygr0oQ5tHIrsqXMlBufcN5Kvw%3D%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f636f6e666967757265643f736f757263653d6175746877617665",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": "/configured?source=authwave",
+      "redirectTo": "?signed-out=1"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=R0p0rCC7DvUxBfpICTvcA0SXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPQKHQDAw2ibJcUvRHu55QRaxwoIYKft64TnIRvLlXBn0cbmwRh%2B0oQ5tHIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97M%3D&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f636f6e666967757265643f736f757263653d6175746877617665",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "returnUri": "/configured?source=authwave",
+      "redirectTo": "https://example.com/bye"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "https://login.authwave.com?c=%2BcPmC66KGCiHA5%2BbubKYbESXfa5Wemh6Z43jPkcgX02eCBsL4zt4CPRHWzLR0y7HEY5pJ23N0AhFyAIcIa22%2FM65QBirhGxhhdD36xwm%2F5oJ4XIrsqXMlBufcN5Kv9g9sUKExVmttJeqg9TX97O5A4qP&d=deployment_with_underscores&i=ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZm&u=2f636f6e666967757265643f736f757263653d6175746877617665",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "action": "logout",
+      "state": "user",
+      "email": "fakelogin@authwave.com"
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": null,
+      "user": null,
+      "stored": false,
+      "data": null,
+      "returnQuery": null,
+      "invoked": null,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": false,
+      "returnQuery": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=changed",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": false,
+      "returnQuery": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": false,
+      "returnQuery": "filter=original&flag&encoded=%7e#no"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=original&flag&encoded=%7e%23no",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "filter=original&flag&encoded=%7e#no",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": true,
+      "returnQuery": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=changed",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": true,
+      "returnQuery": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": false,
+      "rawPlus": true,
+      "returnQuery": "filter=original&flag&encoded=%7e#no"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=original&flag&encoded=%7e%23no",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "filter=original&flag&encoded=%7e#no",
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": false,
+      "returnQuery": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=changed",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": false,
+      "returnQuery": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "",
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": false,
+      "returnQuery": "filter=original&flag&encoded=%7e#no"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=original&flag&encoded=%7e%23no",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "filter=original&flag&encoded=%7e#no",
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": true,
+      "returnQuery": null
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=changed",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": true,
+      "returnQuery": ""
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "",
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "uri": "/my-page?filter=changed",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "rawPlus": true,
+      "returnQuery": "filter=original&flag&encoded=%7e#no"
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/my-page?filter=original&flag&encoded=%7e%23no",
+          303
+        ]
+      ],
+      "calls": 1,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": "filter=original&flag&encoded=%7e#no",
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {}
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "TypeError",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {
+        "id": null,
+        "email": "email"
+      }
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 0,
+      "error": "TypeError",
+      "user": null,
+      "stored": true,
+      "data": null,
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {
+        "id": 123,
+        "email": "person@example.com"
+      }
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/account?tab=security",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "123",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "123",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {
+        "id": false,
+        "email": "email"
+      }
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/account?tab=security",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "",
+        "email"
+      ],
+      "stored": true,
+      "data": [
+        "",
+        "email"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com",
+        "kvp": {
+          "ignored": "value"
+        }
+      }
+    },
+    "expected": {
+      "redirects": [
+        [
+          "/account?tab=security",
+          303
+        ]
+      ],
+      "calls": 0,
+      "error": null,
+      "user": [
+        "user-id",
+        "person@example.com"
+      ],
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": false,
+      "basket": [
+        "tea"
+      ]
+    }
+  },
+  {
+    "case": {
+      "state": "pending",
+      "response": {
+        "id": "user-id",
+        "email": "person@example.com"
+      },
+      "callback": true,
+      "throwCallback": true
+    },
+    "expected": {
+      "redirects": [],
+      "calls": 1,
+      "error": "RuntimeException",
+      "user": null,
+      "stored": true,
+      "data": [
+        "user-id",
+        "person@example.com"
+      ],
+      "returnQuery": null,
+      "invoked": true,
+      "basket": [
+        "tea"
+      ]
+    }
+  }
+]
