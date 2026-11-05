@@ -251,8 +251,19 @@ func (a *Authenticator) completeAuth() error {
 	return a.tidyResponseData(next.ReturnQuery)
 }
 func (a *Authenticator) tidyResponseData(returnQuery *string) error {
-	uri := a.options.CurrentURIPath
-	var err error
+	local, err := url.Parse(a.options.CurrentURIPath)
+	if err != nil {
+		return err
+	}
+	path := "/" + strings.TrimLeft(local.EscapedPath(), "/")
+	local.Path, err = url.PathUnescape(path)
+	if err != nil {
+		return err
+	}
+	local.RawPath = path
+	local.Scheme, local.Host, local.Opaque = "", "", ""
+	local.User = nil
+	uri := local.String()
 	if returnQuery != nil {
 		uri, err = withQuery(uri, *returnQuery)
 		if err != nil {
