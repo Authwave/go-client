@@ -9,6 +9,10 @@ class RecordingRedirect extends RedirectHandler {
  public array $redirects = [];
  public function redirect(UriInterface $uri, int $code = 303):void { $this->redirects[] = [(string)$uri, $code]; }
 }
+// These fixtures use in-memory state rather than a native browser session ID.
+class OracleSession extends \Authwave\GlobalSessionContainer {
+ public function regenerate():void {}
+}
 $cases = json_decode(stream_get_contents(STDIN), true);
 $out = [];
 foreach($cases as $index => $case) {
@@ -27,7 +31,7 @@ foreach($cases as $index => $case) {
  }
  $error = null; $auth = null;
  try {
-  $auth = new Authenticator('deployment_with_underscores_'.$secret, $uri, $case['host'] ?? 'login.authwave.com', redirectHandler:$redirect, onAuthenticated:($case['callback'] ?? false) ? $callback : null);
+  $auth = new Authenticator('deployment_with_underscores_'.$secret, $uri, $case['host'] ?? 'login.authwave.com', redirectHandler:$redirect, session:new OracleSession(), onAuthenticated:($case['callback'] ?? false) ? $callback : null);
   if(isset($case['returnUri'])) $auth->setReturnUri($case['returnUri']);
   if(($case['action'] ?? '') === 'login') $auth->login($token);
   if(($case['action'] ?? '') === 'logout') $auth->logout($case['redirectTo'] ?? null, $token);

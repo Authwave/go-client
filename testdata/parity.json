@@ -183,10 +183,10 @@
       "calls": 0,
       "error": "InsecureProtocolException",
       "user": null,
-      "stored": true,
+      "stored": false,
       "data": null,
-      "returnQuery": "tab=security",
-      "invoked": false,
+      "returnQuery": null,
+      "invoked": null,
       "basket": [
         "tea"
       ]
@@ -228,10 +228,10 @@
       "calls": 0,
       "error": "InsecureProtocolException",
       "user": null,
-      "stored": true,
+      "stored": false,
       "data": null,
-      "returnQuery": "tab=security",
-      "invoked": false,
+      "returnQuery": null,
+      "invoked": null,
       "basket": [
         "tea"
       ]
@@ -324,7 +324,7 @@
       "user": null,
       "stored": true,
       "data": null,
-      "returnQuery": "tab=security",
+      "returnQuery": null,
       "invoked": false,
       "basket": [
         "tea"
@@ -369,7 +369,7 @@
       "user": null,
       "stored": true,
       "data": null,
-      "returnQuery": "tab=security",
+      "returnQuery": null,
       "invoked": false,
       "basket": [
         "tea"

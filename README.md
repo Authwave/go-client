@@ -24,6 +24,8 @@ http.ListenAndServe(":3000", handler)
 
 Import the package as `authwave "github.com/Authwave/go-client"`. See the complete [server example](examples/server/main.go) and [wiki](https://github.com/Authwave/go-client/wiki) for login, session restoration and logout.
 
+A token can encrypt only its first complete request. Repeating the same request is allowed; a different payload raises ErrTokenReuse. Create a fresh token for a different action or return query, and do not copy tokens or reuse supplied IVs. Session serialisation retains the binding. Tokens restored from older sessions without a binding can still decrypt responses, but require a fresh token to start another request.
+
 The provider-issued key stays on the server. The final underscore separates the deployment identifier from the raw 32-byte secret. `AuthwaveHost` defaults to `login.authwave.com`.
 
 Go 1.21 or later is required. Production applications need HTTPS and a shared persistent `SessionStore`; cookies are Secure by default. Serialized session records contain sensitive token data. Store them on the server. Return authentication and redirect errors to the adapter so it can save the session before output.
