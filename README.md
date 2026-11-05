@@ -28,6 +28,8 @@ The provider-issued key stays on the server. The final underscore separates the 
 
 Go 1.21 or later is required. Production applications need HTTPS and a shared persistent `SessionStore`; cookies are Secure by default. Serialized session records contain sensitive token data. Store them on the server. Return authentication and redirect errors to the adapter so it can save the session before output.
 
+Successful authentication replaces the session ID before saving the identity and invalidates the old ID, preserving other session data. Custom SessionStore implementations must implement Delete(context.Context, string) error. Custom SessionContainer implementations must implement Regenerate() error; when using NewGlobalSessionContainer directly, supply a regeneration function as its second argument. It must replace the ID, invalidate the old session and preserve the map. Errors stop authentication. Ordinary restoration keeps the existing ID.
+
 ## Development
 
 ```bash

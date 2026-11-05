@@ -40,6 +40,8 @@ This Go client implements the current PHP identity contract (`id` and `email`), 
 
 ## Runtime adaptations
 
+Successful authentication now regenerates the session ID before saving the identity and invalidates the old session. Unrelated data is preserved, and ordinary restoration keeps its ID. Custom session containers must provide regeneration, and custom runtime stores must support deleting the old ID.
+
 There is no implicit global browser session. Callers provide a per-request container or use a framework adapter. JSON serialization restores tokens and response objects. Session records contain secrets and belong exclusively in server-side storage.
 
 Redirects transfer control to adapters, which save before sending a 303. Application callbacks are synchronous. Production stores enforce expiration and should serialize concurrent mutations to the same session, matching the sequential processing assumed by the callback marker.

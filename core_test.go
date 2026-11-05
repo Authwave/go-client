@@ -76,12 +76,12 @@ func TestSessionAndModels(t *testing.T) {
 	query := "flag&encoded=%7e"
 	data := NewSessionData(token, NewUserResponseData("id", "email", &message), &query)
 	data.MarkAuthenticationCallbackInvoked()
-	session, _ := NewGlobalSessionContainer(map[string]any{})
+	session, _ := NewGlobalSessionContainer(map[string]any{}, func() error { return nil })
 	_ = session.Set(SessionStoreKey, data)
 	encoded, _ := json.Marshal(session.data)
 	var raw map[string]any
 	_ = json.Unmarshal(encoded, &raw)
-	restored, _ := NewGlobalSessionContainer(raw)
+	restored, _ := NewGlobalSessionContainer(raw, func() error { return nil })
 	value, err := restored.Get(SessionStoreKey)
 	if err != nil {
 		t.Fatal(err)
@@ -108,7 +108,7 @@ func TestCallbackAtMostOnceAfterFailure(t *testing.T) {
 	token := testToken(t)
 	query := "tab=orders"
 	state := map[string]any{}
-	session, _ := NewGlobalSessionContainer(state)
+	session, _ := NewGlobalSessionContainer(state, func() error { return nil })
 	_ = session.Set(SessionStoreKey, NewSessionData(token, nil, &query))
 	cipher, _ := Encrypt(`{"id":"user-id","email":"email"}`, token.SessionIV, token.Secret)
 	uri := "/?AUTHWAVE_RESPONSE_DATA=" + escape(cipher.String())
@@ -134,7 +134,7 @@ func TestCallbackAtMostOnceAfterFailure(t *testing.T) {
 	}
 }
 func TestFakeLoginAndDefaultRedirect(t *testing.T) {
-	session, _ := NewGlobalSessionContainer(map[string]any{})
+	session, _ := NewGlobalSessionContainer(map[string]any{}, func() error { return nil })
 	auth, err := NewAuthenticator(Options{ClientKey: "deployment_" + strings.Repeat("s", 32), CurrentURIPath: "/", Session: session})
 	if err != nil {
 		t.Fatal(err)

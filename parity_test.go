@@ -57,7 +57,7 @@ func TestPHPParity(t *testing.T) {
 			copy(iv[:], strings.Repeat("f", 24))
 			token := NewTokenWithIVs(secret, sessionIV, iv)
 			state := map[string]any{"basket": []string{"tea"}}
-			session, _ := NewGlobalSessionContainer(state)
+			session, _ := NewGlobalSessionContainer(state, func() error { return nil })
 			switch stringValue(c, "state", "") {
 			case "pending":
 				_ = session.Set(SessionStoreKey, NewSessionData(token, nil, nullableString(c, "returnQuery")))
