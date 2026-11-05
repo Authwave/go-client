@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	ErrSessionRegeneration          = errors.New("authwave: session regeneration is required")
 	ErrSessionNotStarted            = errors.New("authwave: session not started")
 	ErrNotLoggedIn                  = errors.New("authwave: not logged in")
 	ErrInsecureProtocol             = errors.New("authwave: insecure provider protocol")

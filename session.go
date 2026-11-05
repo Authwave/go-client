@@ -32,18 +32,26 @@ func (d *SessionData) HasInvokedAuthenticationCallback() bool { return d.Callbac
 func (d *SessionData) MarkAuthenticationCallbackInvoked()     { d.CallbackInvoked = true }
 
 type SessionContainer interface {
+	Regenerate() error
 	Get(string) (any, error)
 	Set(string, any) error
 	Contains(string) bool
 	Remove(string) error
 }
-type GlobalSessionContainer struct{ data map[string]any }
+type GlobalSessionContainer struct {
+	data       map[string]any
+	regenerate func() error
+}
 
-func NewGlobalSessionContainer(data map[string]any) (*GlobalSessionContainer, error) {
+func NewGlobalSessionContainer(data map[string]any, regenerate ...func() error) (*GlobalSessionContainer, error) {
 	if data == nil {
 		return nil, ErrSessionNotStarted
 	}
-	return &GlobalSessionContainer{data: data}, nil
+	var callback func() error
+	if len(regenerate) > 0 {
+		callback = regenerate[0]
+	}
+	return &GlobalSessionContainer{data: data, regenerate: callback}, nil
 }
 func (s *GlobalSessionContainer) Get(key string) (any, error) {
 	value := s.data[key]
@@ -66,3 +74,10 @@ func (s *GlobalSessionContainer) Get(key string) (any, error) {
 func (s *GlobalSessionContainer) Set(key string, value any) error { s.data[key] = value; return nil }
 func (s *GlobalSessionContainer) Contains(key string) bool        { _, ok := s.data[key]; return ok }
 func (s *GlobalSessionContainer) Remove(key string) error         { delete(s.data, key); return nil }
+
+func (s *GlobalSessionContainer) Regenerate() error {
+	if s.regenerate == nil {
+		return ErrSessionRegeneration
+	}
+	return s.regenerate()
+}

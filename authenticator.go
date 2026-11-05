@@ -156,6 +156,9 @@ func (a *Authenticator) FakeLogin(userID string, email *string, redirectTo strin
 		return err
 	}
 	token := NewTokenWithIVs(a.secret, iv, requestIV)
+	if err = a.options.Session.Regenerate(); err != nil {
+		return err
+	}
 	if err = a.options.Session.Set(SessionStoreKey, NewSessionData(token, nil, nil)); err != nil {
 		return err
 	}
@@ -233,6 +236,11 @@ func (a *Authenticator) completeAuth() error {
 	email, err := scalar(data["email"])
 	if err != nil {
 		return err
+	}
+	if !a.IsLoggedIn() {
+		if err = a.options.Session.Regenerate(); err != nil {
+			return err
+		}
 	}
 	a.user = NewAuthUser(id, email)
 	invoked := a.sessionData.CallbackInvoked

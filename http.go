@@ -15,6 +15,7 @@ import (
 
 // SessionStore holds JSON-compatible records on the server. Implementations enforce expiry.
 type SessionStore interface {
+	Delete(context.Context, string) error
 	Load(context.Context, string) (map[string]any, error)
 	Save(context.Context, string, map[string]any, time.Time) error
 }
@@ -46,6 +47,12 @@ func (s *MemorySessionStore) Load(ctx context.Context, id string) (map[string]an
 	var data map[string]any
 	err := json.Unmarshal(entry.data, &data)
 	return data, err
+}
+func (s *MemorySessionStore) Delete(ctx context.Context, id string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	delete(s.entries, id)
+	return nil
 }
 func (s *MemorySessionStore) Save(ctx context.Context, id string, data map[string]any, expiresAt time.Time) error {
 	encoded, err := json.Marshal(data)
@@ -131,11 +138,38 @@ func NewHTTPHandler(options HTTPOptions, handler HTTPHandler) (http.Handler, err
 			}
 			id = hex.EncodeToString(bytes[:])
 		}
-		session, _ := NewGlobalSessionContainer(data)
+		// Work on a detached record, even if a custom store returns a shared map.
+		encoded, cloneErr := json.Marshal(data)
+		if cloneErr != nil {
+			http.Error(w, "Internal Server Error", 500)
+			return
+		}
+		var detached map[string]any
+		if cloneErr = json.Unmarshal(encoded, &detached); cloneErr != nil {
+			http.Error(w, "Internal Server Error", 500)
+			return
+		}
+		data = detached
+		var previousIDs []string
+		session, _ := NewGlobalSessionContainer(data, func() error {
+			var bytes [32]byte
+			if _, err := rand.Read(bytes[:]); err != nil {
+				return err
+			}
+			previousIDs = append(previousIDs, id)
+			id = hex.EncodeToString(bytes[:])
+			return nil
+		})
 		// Persist even when application callbacks panic; let the HTTP server handle the panic.
 		var response *Response
 		func() {
 			defer func() {
+				for _, oldID := range previousIDs {
+					if deleteErr := options.Store.Delete(context.WithoutCancel(ctx), oldID); deleteErr != nil {
+						err = deleteErr
+						return
+					}
+				}
 				saveErr := options.Store.Save(context.WithoutCancel(ctx), id, data, time.Now().Add(options.TTL))
 				if saveErr != nil {
 					err = saveErr
