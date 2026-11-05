@@ -24,6 +24,8 @@ http.ListenAndServe(":3000", handler)
 
 Import the package as `authwave "github.com/Authwave/go-client"`. See the complete [server example](examples/server/main.go) and [wiki](https://github.com/Authwave/go-client/wiki) for login, session restoration and logout.
 
+Callback cleanup redirects use a local path without a scheme or host. The client removes the authentication response parameter while preserving the other query values and fragment.
+
 The provider-issued key stays on the server. The final underscore separates the deployment identifier from the raw 32-byte secret. `AuthwaveHost` defaults to `login.authwave.com`.
 
 Go 1.21 or later is required. Production applications need HTTPS and a shared persistent `SessionStore`; cookies are Secure by default. Serialized session records contain sensitive token data. Store them on the server. Return authentication and redirect errors to the adapter so it can save the session before output.
