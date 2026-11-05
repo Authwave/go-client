@@ -87,12 +87,18 @@ func TestHTTPRoundTrip(t *testing.T) {
 	if completed.Header().Get("Location") != "/callback" {
 		t.Fatal(completed.Header())
 	}
-    oldCookie := cookie
+	oldCookie := cookie
 	cookie = completed.Result().Cookies()[0]
-    if cookie.Value==oldCookie.Value {t.Fatal("session ID was not rotated")}
-    oldSession:=invoke("/callback",oldCookie)
-    if oldSession.Body.String()!=`{"id":null,"loggedIn":false}` {t.Fatal("old ID restored identity",oldSession.Body.String())}
-    if replay:=invoke(providerCallback(t,first.Header().Get("Location")),oldCookie);replay.Code!=303 {t.Fatal("old response replay was not cleaned",replay.Code)}
+	if cookie.Value == oldCookie.Value {
+		t.Fatal("session ID was not rotated")
+	}
+	oldSession := invoke("/callback", oldCookie)
+	if oldSession.Body.String() != `{"id":null,"loggedIn":false}` {
+		t.Fatal("old ID restored identity", oldSession.Body.String())
+	}
+	if replay := invoke(providerCallback(t, first.Header().Get("Location")), oldCookie); replay.Code != 303 {
+		t.Fatal("old response replay was not cleaned", replay.Code)
+	}
 
 	restored := invoke("/callback", cookie)
 	if restored.Body.String() != `{"id":"user-id","loggedIn":true}` || restored.Header().Get("Cache-Control") != "no-store" {
