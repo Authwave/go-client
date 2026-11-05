@@ -1,6 +1,6 @@
 # PHP client parity
 
-This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `b35909368b3bd78bb3c7401c694aef02d6a560dd`. The language API uses exported methods, immutable user accessors and explicit error returns.
+This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `4dcc01fe5d07933400c82695bf9574097ee19d43`. The language API uses exported methods, immutable user accessors and explicit error returns.
 
 | PHP source | Go equivalent |
 | --- | --- |
