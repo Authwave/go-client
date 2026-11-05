@@ -38,3 +38,5 @@ go vet ./...
 Tests include 68 deterministic PHP-reference scenarios and complete HTTP flows with simulated provider responses. Set `AUTHWAVE_PHP_REFERENCE` to a PHP checkout with installed Composer dependencies to verify the fixtures against the live PHP source.
 
 [PARITY.md](PARITY.md) maps each PHP source class to the Go API and describes runtime adaptations.
+
+For a local test provider, HTTP is supported for hosts ending in `.test`, such as `http://login.realtest.authwave.test:9090`. Configure local DNS or a hosts-file entry for the provider. This exception applies only to HTTP and the complete `.test` hostname suffix; `.authwave-test` and names such as `example.test.com` do not qualify. Other remote providers require HTTPS. Use test accounts on a trusted development network; the suffix does not encrypt traffic or guarantee that it stays on your machine.

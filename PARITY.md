@@ -1,6 +1,6 @@
 # PHP client parity
 
-This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `bcb547d`. The language API uses exported methods, immutable user accessors and explicit error returns.
+This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `4dcc01fe5d07933400c82695bf9574097ee19d43`. The language API uses exported methods, immutable user accessors and explicit error returns.
 
 | PHP source | Go equivalent |
 | --- | --- |
@@ -35,7 +35,7 @@ This Go client implements the current PHP identity contract (`id` and `email`), 
 - Logout removes only authentication state before redirect. Explicit destinations override the configured return URI, then the provider default. Query-only destinations replace the current query.
 - Fake login stores synthetic data, appends its own response query and defers refreshing the current user until the redirected request. Only the default fake email takes the local logout branch.
 - The low-level token decoder uses the request IV and accepts `uuid` or `id`; the normal response path uses the secret session IV and `id`. Extra fields are ignored, matching the current PHP client.
-- Administration links point to `/admin/` and do not grant access. HTTPS is required except for `localhost` and the literal `127.0.0.127`.
+- Administration links point to `/admin/` and do not grant access. HTTPS is required except for `localhost`, the literal `127.0.0.127`, and HTTP providers with a `.test` hostname suffix.
 - The unused legacy session-store constant and deprecated user alias/getter are retained. Actual storage uses `Authwave\SessionData`.
 
 ## Runtime adaptations
@@ -47,3 +47,5 @@ Redirects transfer control to adapters, which save before sending a 303. Applica
 PHP dependency APIs such as the entire PSR-7 URI interface are not reimplemented; native language URI types/helpers provide the operations needed by the client. PHP's diagnostic logging and warning mechanisms use the host language's conventions. Browser login against a deployed provider is separate from the automated simulated-provider tests.
 
 Go returns sentinel errors for client failures and `*RedirectError` for redirects. Callers must return these errors to `NewHTTPHandler`. Callbacks return an error instead of throwing. The deprecated `GetUser` is documented with a Go deprecation comment rather than emitting runtime warnings. Nonces use fixed-length `InitVector` values; constructor errors are explicit. Immutable identity data is exposed through `ID()` and `Email()`.
+
+Provider HTTP policy also allows the `.test` hostname suffix (case-insensitive, ignoring trailing DNS dots), for local test providers. The exception does not allow other schemes.

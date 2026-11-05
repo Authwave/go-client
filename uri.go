@@ -34,7 +34,8 @@ func normalizeBaseURI(base string) (string, error) {
 	if u.Hostname() == "" {
 		return "", ErrInsecureProtocol
 	}
-	if u.Hostname() != "localhost" && u.Hostname() != "127.0.0.127" && u.Scheme != "https" {
+	isTestHTTP := u.Scheme == "http" && strings.HasSuffix(strings.ToLower(strings.TrimRight(u.Hostname(), ".")), ".test")
+	if u.Hostname() != "localhost" && u.Hostname() != "127.0.0.127" && !isTestHTTP && u.Scheme != "https" {
 		return "", ErrInsecureProtocol
 	}
 	return u.Scheme + "://" + u.Host, nil
