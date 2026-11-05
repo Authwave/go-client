@@ -98,13 +98,13 @@ func (a *Authenticator) Login(token *Token) error {
 	if err != nil {
 		return err
 	}
+	uri, err := a.GetLoginURI(token)
+	if err != nil {
+		return err
+	}
 	query := u.RawQuery
 	a.sessionData = NewSessionData(token, nil, &query)
 	if err = a.options.Session.Set(SessionStoreKey, a.sessionData); err != nil {
-		return err
-	}
-	uri, err := a.GetLoginURI(token)
-	if err != nil {
 		return err
 	}
 	return a.options.RedirectHandler(uri, 303)

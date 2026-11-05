@@ -1,6 +1,6 @@
 # PHP client parity
 
-This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `bcb547d`. The language API uses exported methods, immutable user accessors and explicit error returns.
+This Go client implements the current PHP identity contract (`id` and `email`), following PHP commit `72c213ddef1797cd096757e1c8c70d826abd7514`. The language API uses exported methods, immutable user accessors and explicit error returns.
 
 | PHP source | Go equivalent |
 | --- | --- |
@@ -39,6 +39,8 @@ This Go client implements the current PHP identity contract (`id` and `email`), 
 - The unused legacy session-store constant and deprecated user alias/getter are retained. Actual storage uses `Authwave\SessionData`.
 
 ## Runtime adaptations
+
+Tokens retain the first complete request plaintext and reject different payloads with the same nonce. Repeating an identical request remains deterministic. The binding is persisted in session serialisation. Legacy tokens without a known binding may decrypt responses but cannot encrypt another request. Login builds the request before replacing pending exchange data.
 
 There is no implicit global browser session. Callers provide a per-request container or use a framework adapter. JSON serialization restores tokens and response objects. Session records contain secrets and belong exclusively in server-side storage.
 

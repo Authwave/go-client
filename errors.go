@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	ErrTokenReuse                   = errors.New("authwave: create a new token for a different request")
 	ErrSessionNotStarted            = errors.New("authwave: session not started")
 	ErrNotLoggedIn                  = errors.New("authwave: not logged in")
 	ErrInsecureProtocol             = errors.New("authwave: insecure provider protocol")
